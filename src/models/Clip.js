@@ -1,5 +1,15 @@
 import mongoose from 'mongoose';
 
-const ClipScheme = new mongoose.Schema({
-
+const ClipSchema = new mongoose.Schema({
+  name: String,
+  description: String,
+  created: { type: Date, default: Date.now },
+  private: Boolean,
+  meta: {
+    favs: Number,
+  },
 });
+
+const Clip = mongoose.model('Clip', ClipSchema);
+
+export default Clip;
