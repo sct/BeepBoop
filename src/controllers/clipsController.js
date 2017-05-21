@@ -11,5 +11,9 @@ export const getAllClips = (req, res, next) => {
 }
 
 export const createClip = (req, res, next) => {
-  return res.status(200).json({ message: "do create here" });
+  Clip.create(req.body, (err, clip) => {
+    if (err) return next(err);
+
+    return res.status(200).json(clip);
+  });
 }

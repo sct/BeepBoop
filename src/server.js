@@ -12,6 +12,7 @@ import {
   botConfig
 } from './config';
 import routes from './routes';
+import { prepareBot } from './bot';
 
 const app = express();
 const bot = new Discord.Client();
@@ -40,12 +41,21 @@ try {
 // Connect to Discord
 bot.on('ready', () => {
   log.info('Bot is connected to Discord');
+  prepareBot(bot);
 });
 
 bot.login(botConfig.token);
 
 // Load routing
 app.use('/', routes);
+
+app.use((err, req, res, next) => {
+  if (err) {
+    res.status(500).json({ error: err.message });
+  } else {
+    next(err);
+  }
+});
 
 app.server.listen(process.env.PORT || config.port);
 

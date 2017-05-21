@@ -14,6 +14,6 @@ router.get('/', (req, res) => {
     name: "BeepBoopAPI",
     version,
   });
-})
+});
 
 export default router;
