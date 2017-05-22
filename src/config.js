@@ -11,6 +11,8 @@ export const config = {
   port: process.env.PORT || 3000,
   logging: process.env.LOGGING || true,
   loggingLevel: process.env.LOGGING_LEVEL || 'debug',
+  uploadDirectory: process.env.UPLOAD_DIRECTORY || 'clipsTemp/',
+  clipDirectory: process.env.CLIP_DIRECTORY || 'clips/',
 };
 
 export const botConfig = {

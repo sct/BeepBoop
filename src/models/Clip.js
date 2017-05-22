@@ -5,7 +5,7 @@ const ClipSchema = new mongoose.Schema({
   description: { type: String, required: true},
   created: { type: Date, default: Date.now },
   private: Boolean,
-  uploaded: Boolean,
+  filename: String,
   deleted: Boolean,
   global: Boolean,
   meta: {

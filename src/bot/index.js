@@ -1,15 +1,24 @@
 import log from 'winston';
 
-export const prepareBot = bot => {
-  log.info('Preparing discord bot');
+class BotController {
 
-  const channel = bot.channels.find('type', 'voice');
-  
-  channel.join()
-    .then(connection => {
-      log.info(`Sucessfully joined voice channel ${channel.name}`);
-    })
-    .catch(err => log.error(err.message));
+  constructor(bot) {
+    this.bot = bot;
+    this.connection = null;
+  }
+
+  prepareBot = () => {
+    log.info('Preparing discord bot');
+
+    const channel = this.bot.channels.find('type', 'voice');
+    
+    channel.join()
+      .then(connection => {
+        log.info(`Sucessfully joined voice channel ${channel.name}`);
+        this.connection = connection;
+      })
+      .catch(err => log.error(err.message));
+  }
 }
 
-export default prepareBot;
+export default BotController;

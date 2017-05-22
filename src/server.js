@@ -12,10 +12,11 @@ import {
   botConfig
 } from './config';
 import routes from './routes';
-import { prepareBot } from './bot';
+import BotController from './bot';
 
 const app = express();
 const bot = new Discord.Client();
+export const botControl = new BotController(bot);
 
 app.server = http.createServer(app);
 
@@ -27,6 +28,7 @@ app.use(bodyParser.json());
 
 // Connect to Database
 try {
+  mongoose.Promise = global.Promise;
   mongoose.connect(`mongodb://${db.host}/${db.name}`, err => {
     if (err) {
       throw new Error(err)
@@ -41,7 +43,7 @@ try {
 // Connect to Discord
 bot.on('ready', () => {
   log.info('Bot is connected to Discord');
-  prepareBot(bot);
+  botControl.prepareBot();
 });
 
 bot.login(botConfig.token);

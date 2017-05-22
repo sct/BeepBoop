@@ -37,3 +37,7 @@ node_modules/
 
 # dotenv environment variables file
 .env
+
+# clips directories
+clips
+clipsTemp
