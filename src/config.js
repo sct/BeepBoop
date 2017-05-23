@@ -20,12 +20,13 @@ export const botConfig = {
 };
 
 export const db = {
-  host: 'localhost',
-  name: 'beepboop',
+  host: process.env.DB_HOST || 'localhost',
+  name: process.env.DB_NAME || 'beepboop',
 };
 
 export const auth = {
-  jwksUri: process.env.AUTH_JWKS_URI,
-  audience: process.env.AUTH_AUDIENCE,
-  issuer: process.env.AUTH_ISSUER,
+  clientId: process.env.AUTH_CLIENT_ID,
+  clientSecret: process.env.AUTH_CLIENT_SECRET,
+  callbackUrl: process.env.AUTH_CALLBACK_URL,
+  jwtSecret: process.env.AUTH_JWT_SECRET || 'secret cat',
 };

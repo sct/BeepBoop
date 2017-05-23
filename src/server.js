@@ -13,6 +13,7 @@ import {
 } from './config';
 import routes from './routes';
 import BotController from './bot';
+import passport from './core/passport';
 
 const app = express();
 const bot = new Discord.Client();
@@ -25,6 +26,9 @@ log.level = config.loggingLevel;
 app.use(morgan('dev'));
 
 app.use(bodyParser.json());
+
+// Configure Auth (Passport)
+app.use(passport.initialize());
 
 // Connect to Database
 try {
