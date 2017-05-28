@@ -41,3 +41,5 @@ node_modules/
 # clips directories
 clips
 clipsTemp
+
+.DS_Store

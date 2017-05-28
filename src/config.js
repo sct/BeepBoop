@@ -5,10 +5,8 @@ if (fs.existsSync('.env')) {
   dotenv.config();
 }
 
-export const port = process.env.PORT || 3000;
-
 export const config = {
-  port: process.env.PORT || 3000,
+  port: process.env.PORT || 3005,
   logging: process.env.LOGGING || true,
   loggingLevel: process.env.LOGGING_LEVEL || 'debug',
   uploadDirectory: process.env.UPLOAD_DIRECTORY || 'clipsTemp/',
@@ -29,4 +27,5 @@ export const auth = {
   clientSecret: process.env.AUTH_CLIENT_SECRET,
   callbackUrl: process.env.AUTH_CALLBACK_URL,
   jwtSecret: process.env.AUTH_JWT_SECRET || 'secret cat',
+  redirectUrl: process.env.AUTH_REDIRECT_URL || 'http://localhost:3000/login',
 };

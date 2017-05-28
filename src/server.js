@@ -5,6 +5,7 @@ import bodyParser from 'body-parser';
 import mongoose from 'mongoose';
 import log from 'winston';
 import Discord from 'discord.js';
+import cors from 'cors';
 
 import {
   config,
@@ -26,6 +27,7 @@ log.level = config.loggingLevel;
 app.use(morgan('dev'));
 
 app.use(bodyParser.json());
+app.use(cors());
 
 // Configure Auth (Passport)
 app.use(passport.initialize());
@@ -63,7 +65,7 @@ app.use((err, req, res, next) => {
   }
 });
 
-app.server.listen(process.env.PORT || config.port);
+app.server.listen(config.port);
 
 log.info(`Started on port ${app.server.address().port}`);
 

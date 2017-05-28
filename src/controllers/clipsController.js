@@ -40,7 +40,12 @@ export const getClip = (req, res, next) => {
 }
 
 export const createClip = (req, res, next) => {
-  Clip.create(req.body, (err, clip) => {
+  const newClip = {
+    _user: req.user._id,
+    ...req.body,
+  };
+
+  Clip.create(newClip, (err, clip) => {
     if (err) return next(err);
 
     return res.status(200).json(clip);
