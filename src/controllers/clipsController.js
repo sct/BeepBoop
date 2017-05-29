@@ -53,6 +53,39 @@ export const createClip = (req, res, next) => {
 }
 
 export const uploadClip = (req, res, next) => {
+  if (!fs.existsSync(config.clipDirectory)) {
+    fs.mkdirSync(config.clipDirectory);
+  }
+
+  const newClip = {
+    _user: req.user._id,
+    ...req.body,
+  };
+
+  Clip.create(newClip, (err, clip) => {
+    if (err) return next(err);
+
+    const newFile = `${config.clipDirectory}${clip._id}.${mime.extension(req.file.mimetype)}`;
+
+    fs.rename(req.file.path, newFile, err => {
+      if (err) {
+        next(err);
+      } else {
+        clip.filename = newFile;
+
+        clip.save((err, newClip) => {
+          if (err) {
+            next(err);
+          } else {
+            res.status(200).json(newClip);
+          }
+        });
+      }
+    });
+  });
+}
+
+export const uploadClipExisting = (req, res, next) => {
   getClipDB(req.params.clip)
     .then(clip => {
       if (!fs.existsSync(config.clipDirectory)) {

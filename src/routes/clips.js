@@ -4,7 +4,7 @@ import multer from 'multer';
 import { config } from '../config';
 import {
   getAllClips, createClip, getClip,
-  uploadClip, playClip,
+  uploadClipExisting, playClip, uploadClip,
 } from '../controllers/clipsController';
 import { isAuthenticated } from '../controllers/usersController';
 
@@ -16,6 +16,8 @@ router.post('/', isAuthenticated, createClip);
 
 router.get('/:clip', isAuthenticated, getClip);
 router.get('/:clip/play', isAuthenticated, playClip);
-router.post('/:clip/upload', isAuthenticated, upload.single('clip'), uploadClip);
+router.post('/:clip/upload', isAuthenticated, upload.single('clip'), uploadClipExisting);
+
+router.post('/upload', isAuthenticated, upload.single('clip'), uploadClip)
 
 export default router;
