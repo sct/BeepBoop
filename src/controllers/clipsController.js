@@ -24,12 +24,14 @@ const updateClipDB = (id, params) =>
   });
 
 export const getAllClips = (req, res, next) => {
-  Clip.find((err, clips) => {
-    if (err) {
-      return next(err);
-    }
+  Clip.find({ _user: req.user._id })
+    .populate('_user')
+    .exec((err, clips) => {
+      if (err) {
+        return next(err);
+      }
 
-    return res.status(200).json(clips);
+      return res.status(200).json(clips);
   });
 }
 
