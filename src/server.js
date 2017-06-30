@@ -13,12 +13,11 @@ import {
   botConfig
 } from './config';
 import routes from './routes';
-import BotController from './bot';
+import botControl from './bot';
 import passport from './core/passport';
 
 const app = express();
 const bot = new Discord.Client();
-export const botControl = new BotController(bot);
 
 app.server = http.createServer(app);
 
@@ -49,7 +48,8 @@ try {
 // Connect to Discord
 bot.on('ready', () => {
   log.info('Bot is connected to Discord');
-  botControl.prepareBot();
+  botControl.prepareBot(bot);
+  botControl.startCoreListeners();
 });
 
 bot.login(botConfig.token);

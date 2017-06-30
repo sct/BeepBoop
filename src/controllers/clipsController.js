@@ -3,7 +3,7 @@ import mime from 'mime';
 
 import { config } from '../config';
 import Clip from '../models/Clip';
-import { botControl } from '../server';
+import botControl from '../bot';
 
 const getClipDB = (id) =>
   new Promise((resolve, reject) => {
